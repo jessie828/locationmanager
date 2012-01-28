@@ -1,0 +1,7 @@
+.cproject
+.project
+Makefile
+ui_*.h
+bin/*
+obj/*
+lib/*
