@@ -9,6 +9,7 @@ include(../LocationManagement.pri)
 TEMPLATE = app
 
 INCLUDEPATH += \
+              ./uic_headers/ \
               #
 LIBS += \
         #
@@ -22,10 +23,12 @@ UI_HEADERS_DIR = ./uic_headers
 
 # Input
 SOURCES += \
+           mainWindow.cpp \
            main.cpp \
            #
 
 HEADERS += \
+           mainWindow.h \
            #
 
 FORMS += \

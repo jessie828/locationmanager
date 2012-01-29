@@ -6,11 +6,16 @@
  */
 
 #include <stdio.h>
+#include <QApplication>
 
-int main()
+#include "mainWindow.h"
+
+int main(int argc, char** argv)
 {
-	printf("this is a test\n");
-	return 0;
+	QApplication a(argc, argv);
+	MainWindow *window = new MainWindow;
+	window->show();
+	return a.exec();
 }
 
 
