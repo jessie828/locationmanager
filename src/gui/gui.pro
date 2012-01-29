@@ -24,13 +24,16 @@ UI_HEADERS_DIR = ./uic_headers
 # Input
 SOURCES += \
            mainWindow.cpp \
+           importDialog.cpp \
            main.cpp \
            #
 
 HEADERS += \
            mainWindow.h \
+           importDialog.h \
            #
 
 FORMS += \
          mainWindow.ui \
+         importDialog.ui \
          #
