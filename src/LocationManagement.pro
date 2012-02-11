@@ -7,6 +7,7 @@ TEMPLATE = subdirs
 CONFIG += ordered
 
 SUBDIRS = \
+          data \
           dbcon \
           gui \
           #

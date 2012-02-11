@@ -16,10 +16,12 @@ CONFIG += no_lflags_merge
 INCLUDEPATH += \
               ./uic_headers/ \
               $$LMNGT_SANDBOX_SRC/dbcon/ \
+              $$LMNGT_SANDBOX_SRC/data/ \
               #
 
 LIBS += \
         -L$$LMNGT_SANDBOX_LIB \
+        -ldata \
         -ldbcon \
         #
 
