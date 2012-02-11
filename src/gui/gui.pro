@@ -8,10 +8,19 @@ include(../LocationManagement.pri)
 
 TEMPLATE = app
 
+DYNAMIC_FLAG = -W1,-Bdynamic
+STATIC_FLAG = -W1,-Bstatic
+
+CONFIG += no_lflags_merge
+
 INCLUDEPATH += \
               ./uic_headers/ \
+              $$LMNGT_SANDBOX_SRC/dbcon/ \
               #
+
 LIBS += \
+        -L$$LMNGT_SANDBOX_LIB \
+        -ldbcon \
         #
 
 TARGET = locationManager.exe
