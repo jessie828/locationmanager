@@ -17,10 +17,12 @@ INCLUDEPATH += \
               ./uic_headers/ \
               $$LMNGT_SANDBOX_SRC/dbcon/ \
               $$LMNGT_SANDBOX_SRC/data/ \
+              $$LMNGT_SANDBOX_SRC/importer/ \
               #
 
 LIBS += \
         -L$$LMNGT_SANDBOX_LIB \
+        -limporter \
         -ldata \
         -ldbcon \
         #

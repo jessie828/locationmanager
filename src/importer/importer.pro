@@ -10,25 +10,27 @@ TEMPLATE = lib
 
 INCLUDEPATH += \
               $$LMNGT_SANDBOX_SRC/data/ \
+              $$LMNGT_SANDBOX_SRC/dbcon/ \
               #
 
 LIBS += \
         -L$$LMNGT_SANDBOX_LIB \
          -ldata \
+         -ldbcon \
         #
 
 CONFIG += staticlib
 
-TARGET = dbcon 
+TARGET = importer 
 DESTDIR = $$LMNGT_SANDBOX_LIB 
 
 # Input
 SOURCES += \
-           databaseConnection.cpp \
+           saxHandler.cpp \
            #
 
 HEADERS += \
-           databaseConnection.h \
+           saxHandler.h \
            #
 
 QMAKE_CXXFLAGS += -fno-strict-aliasing

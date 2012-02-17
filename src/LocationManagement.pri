@@ -18,6 +18,7 @@ LMNGT_SANDBOX_SRC = $$LMNGT_SANDBOX/src
 LMNGT_SANDBOX_MOC = ./moc_cpp
 
 QT += sql
+QT += xml
 
 QMAKE_CXXFLAGS += -fPIC -fmessage-length=0
 QMAKE_CFLAGS   += -fPIC -fmessage-length=0i

@@ -17,7 +17,7 @@ int Trip::getDuration() const
     return duration;
 }
 
-QList<Location> Trip::getLocations() const
+QList<Location*> Trip::getLocations() const
 {
     return locations;
 }
@@ -52,9 +52,9 @@ void Trip::setDuration(int duration)
     this->duration = duration;
 }
 
-void Trip::setLocations(QList<Location> locations)
+void Trip::appendLocation(Location *location)
 {
-    this->locations = locations;
+    this->locations.append(location);
 }
 
 void Trip::setMaxSpeed(double maxSpeed)

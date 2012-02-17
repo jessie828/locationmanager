@@ -10,6 +10,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(actionFrom_File, SIGNAL(activated()), this, SLOT(openImportDialog()));
 }
 
+
 void MainWindow::openImportDialog()
 {
     ImportDialog *importDialog = new ImportDialog;

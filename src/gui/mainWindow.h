@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include "ui_mainWindow.h"
+#include "databaseConnection.h"
 
 class MainWindow: public QMainWindow, private Ui::locationManagerMainWindow
 {
