@@ -41,3 +41,14 @@ void Location::setTime(QDateTime time)
     this->time = time;
 }
 
+QString Location::toString()
+{
+    QString dateFormat = QString("yyyy-MM-dd'T'hh:mm:ss'Z'");
+    QString locationString;
+    locationString = "Time: " + QString(time.toString(dateFormat)) +
+        " altitude: " + QString::number(getAltitude()) +
+        " latitude: " + QString::number(getLatitude()) +
+        " longitude: " + QString::number(getLongitude());
+    return locationString;
+}
+

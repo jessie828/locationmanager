@@ -72,3 +72,17 @@ void Trip::setStopDate(QDateTime stopDate)
     this->stopDate = stopDate;
 }
 
+
+QString Trip::toString()
+{
+    QString dateFormat = QString("yyyy-MM-dd'T'hh:mm:ss'Z'");
+    QString locationString;
+    locationString = "startDate = " + QString(startDate.toString(dateFormat)) +
+        " stopDate = " + QString(stopDate.toString(dateFormat)) +
+        " duration = " + QString::number(duration) +
+        " distance = " + QString::number(distance) +
+        " avgSpeed = " + QString::number(maxSpeed) +
+        " location count = " + QString::number(locations.size());
+    return locationString;
+}
+

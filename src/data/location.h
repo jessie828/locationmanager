@@ -21,6 +21,8 @@ public:
     void setLatitude(double latitude);
     void setLongitude(double longitude);
     void setTime(QDateTime time);
+
+    QString toString();
 };
 
 #endif /* LOCATION_H_ */

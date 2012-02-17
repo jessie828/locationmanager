@@ -34,6 +34,7 @@ public:
     void setMaxSpeed(double maxSpeed);
     void setStartDate(QDateTime startDate);
     void setStopDate(QDateTime stopDate);
+    QString toString();
 };
 
 #endif /* TRIP_H_ */
