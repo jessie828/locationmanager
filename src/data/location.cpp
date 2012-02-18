@@ -1,6 +1,12 @@
 #include "location.h"
 
 
+int Location::getTripId() const
+{
+    return tripId;
+}
+
+
 double Location::getAltitude() const
 {
     return altitude;
@@ -20,6 +26,12 @@ QDateTime Location::getTime() const
 {
     return time;
 }
+
+void Location::setTripId(int tripId)
+{
+    this->tripId = tripId;
+}
+
 
 void Location::setAltitude(double altitude)
 {

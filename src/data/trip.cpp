@@ -1,5 +1,15 @@
 #include "trip.h"
 
+Trip::Trip(int id)
+{
+    this->id = id;
+}
+
+
+int Trip::getId() const
+{
+    return id;
+}
 
 
 double Trip::getAvgSpeed() const

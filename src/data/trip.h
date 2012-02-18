@@ -9,6 +9,7 @@
 class Trip
 {
 private:
+    int id;
     QDateTime startDate;
     QDateTime stopDate;
     int duration;
@@ -18,6 +19,8 @@ private:
     QList<Location*> locations;
 
 public:
+    Trip(int id);
+    int getId() const;
     double getAvgSpeed() const;
     int getDistance() const;
     int getDuration() const;
