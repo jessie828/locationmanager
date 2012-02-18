@@ -7,7 +7,6 @@
 
 #include <stdio.h>
 #include "databaseConnection.h"
-#include "saxHandler.h"
 
 #include <QApplication>
 
@@ -23,8 +22,6 @@ int main(int argc, char** argv)
     {
         return -1;
     }
-    TcxSaxHandler handler;
-    handler.parseFile(QString("/home/jessie/my_tracks/tcx/demo.tcx"));
     return a.exec();
 }
 

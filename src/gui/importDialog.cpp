@@ -13,7 +13,10 @@ ImportDialog::ImportDialog(QWidget *parent)
 
 void ImportDialog::import()
 {
-//TODO do import
+    QString fileLocation = locationInputField->toPlainText();
+    TcxSaxHandler handler;
+    handler.parseFile(fileLocation);
+    close();
 }
 
 

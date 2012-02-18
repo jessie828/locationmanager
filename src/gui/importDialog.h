@@ -3,6 +3,8 @@
 
 #include "ui_importDialog.h"
 
+#include "saxHandler.h"
+
 class ImportDialog : public QDialog, private Ui::importDialog
 {
     Q_OBJECT
