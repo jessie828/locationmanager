@@ -18,6 +18,7 @@ INCLUDEPATH += \
               $$LMNGT_SANDBOX_SRC/dbcon/ \
               $$LMNGT_SANDBOX_SRC/data/ \
               $$LMNGT_SANDBOX_SRC/importer/ \
+              $$LMNGT_SANDBOX_SRC/util/ \
               #
 
 LIBS += \
@@ -25,6 +26,7 @@ LIBS += \
         -limporter \
         -ldata \
         -ldbcon \
+        -lutil \
         #
 
 TARGET = locationManager.exe

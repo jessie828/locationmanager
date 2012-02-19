@@ -8,6 +8,7 @@ CONFIG += ordered
 
 SUBDIRS = \
           data \
+          util \
           dbcon \
           importer \
           gui \

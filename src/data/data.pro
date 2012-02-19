@@ -9,7 +9,13 @@ include(../LocationManagement.pri)
 TEMPLATE = lib
 
 INCLUDEPATH += \
+              $$LMNGT_SANDBOX_SRC/util \
               #
+
+LIBS += \
+        -L$$LMNGT_SANDBOX_LIB \
+        -lutil \
+        #
 
 CONFIG += staticlib
 

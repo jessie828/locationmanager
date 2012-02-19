@@ -9,30 +9,24 @@ include(../LocationManagement.pri)
 TEMPLATE = lib
 
 INCLUDEPATH += \
-              $$LMNGT_SANDBOX_SRC/util \
-              $$LMNGT_SANDBOX_SRC/data/ \
-              $$LMNGT_SANDBOX_SRC/dbcon/ \
               #
 
 LIBS += \
         -L$$LMNGT_SANDBOX_LIB \
-         -lutil \
-         -ldata \
-         -ldbcon \
         #
 
 CONFIG += staticlib
 
-TARGET = importer 
+TARGET = util
 DESTDIR = $$LMNGT_SANDBOX_LIB 
 
 # Input
 SOURCES += \
-           saxHandler.cpp \
+           util.cpp \
            #
 
 HEADERS += \
-           saxHandler.h \
+           util.h \
            #
 
 QMAKE_CXXFLAGS += -fno-strict-aliasing
