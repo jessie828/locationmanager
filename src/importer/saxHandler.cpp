@@ -18,7 +18,9 @@ bool TcxSaxHandler::startElement(const QString & /* namespaceURI */, const QStri
 {
     if (qName == "Activities")
     {
-        m_trip = new Trip;
+        int tripId = Database::getInstance()->getLastTripId();
+        tripId++;
+        m_trip = new Trip(tripId);
     }
     else if (qName == "Lap")
     {
@@ -38,6 +40,7 @@ bool TcxSaxHandler::startElement(const QString & /* namespaceURI */, const QStri
     else if(qName == "Trackpoint")
     {
         m_location = new Location;
+        m_location->setTripId(m_trip->getId());
     }
     else if(qName == "Time")
     {
@@ -96,7 +99,6 @@ bool TcxSaxHandler::characters(const QString &str)
     }
     else if(m_altitude)
     {
-        printf("altitude %s\n", str.toAscii().data());
         double altidude = str.toDouble();
         m_location->setAltitude(altidude);
         m_altitude = false;
@@ -114,6 +116,9 @@ bool TcxSaxHandler::endElement(const QString & /* namespaceURI */,  const QStrin
     }
     else if(qName == "Activities")
     {
+        m_trip->calculateDistanceBetweenLocations();
+        m_trip->calculateSpeed();
+        m_trip->calculateAvgSpeed();
         Database::getInstance()->insert(m_trip);
     }
     return true;

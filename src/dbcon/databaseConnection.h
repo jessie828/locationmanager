@@ -6,17 +6,21 @@
 #include <stdio.h>
 
 #include <QSqlDatabase>
+#include <QSqlQuery>
 #include <QMessageBox>
 #include <QSqlError>
+#include <QVariant>
 
 class Database
 {
 
 public:
+    static const QString dateFormat;
     static Database* getInstance();
     bool createConnection();
     bool insert(Trip *trip);
     bool insert(Location *location);
+    int getLastTripId() const;
     ~Database();
 
 protected:
