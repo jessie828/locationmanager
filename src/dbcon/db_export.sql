@@ -13,8 +13,8 @@
 CREATE TABLE `Locations` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `trip_id` int(11) NOT NULL,
-  `time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `altitude` int(11) DEFAULT NULL,
+  `time` timestamp NOT NULL,
+  `altitude` double DEFAULT NULL,
   `latitude` double DEFAULT NULL,
   `longitude` double DEFAULT NULL,
   PRIMARY KEY (`id`)
@@ -32,10 +32,10 @@ CREATE TABLE `Locations` (
 # DROP TABLE IF EXISTS Trips;
 CREATE TABLE `Trips` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `startDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `endDate` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `startDate` timestamp NOT NULL,
+  `endDate` timestamp NOT NULL,
   `duration` int(11) DEFAULT NULL,
-  `distance` int(11) DEFAULT NULL,
+  `distance` double DEFAULT NULL,
   `average_speed` double DEFAULT NULL,
   `max_speed` double DEFAULT NULL,
   PRIMARY KEY (`id`)
