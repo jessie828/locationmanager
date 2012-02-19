@@ -118,7 +118,6 @@ bool TcxSaxHandler::endElement(const QString & /* namespaceURI */,  const QStrin
     {
         m_trip->calculateDistanceBetweenLocations();
         m_trip->calculateSpeed();
-        m_trip->calculateAvgSpeed();
         Database::getInstance()->insert(m_trip);
     }
     return true;
