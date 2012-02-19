@@ -3,7 +3,6 @@
 
 #include <QDateTime>
 
-
 class Location
 {
 private:
@@ -12,6 +11,9 @@ private:
     double altitude;
     double latitude;
     double longitude;
+
+    double distance;
+    double speedMPS;
 
 public:
     int getTripId() const;
@@ -26,6 +28,10 @@ public:
     void setTime(QDateTime time);
 
     QString toString();
+    double getDistance() const;
+    double getSpeedMps() const;
+    void setDistance(double distance);
+    void setSpeedMps(double speedMps);
 };
 
 #endif /* LOCATION_H_ */

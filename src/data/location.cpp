@@ -43,6 +43,26 @@ void Location::setLatitude(double latitude)
     this->latitude = latitude;
 }
 
+double Location::getDistance() const
+{
+    return distance;
+}
+
+double Location::getSpeedMps() const
+{
+    return speedMPS;
+}
+
+void Location::setDistance(double distance)
+{
+    this->distance = distance;
+}
+
+void Location::setSpeedMps(double speedMps)
+{
+    speedMPS = speedMps;
+}
+
 void Location::setLongitude(double longitude)
 {
     this->longitude = longitude;

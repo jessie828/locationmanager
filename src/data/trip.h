@@ -2,6 +2,9 @@
 #define TRIP_H_
 
 #include "location.h"
+#include "util.h"
+
+#include <stdio.h>
 
 #include <QDateTime>
 #include <QList>
@@ -28,13 +31,13 @@ public:
     double getMaxSpeed() const;
     QDateTime getStartDate() const;
     QDateTime getStopDate() const;
-    void setAvgSpeed(double avgSpeed);
     void setDistance(int distance);
+    void calculateSpeed();
     void setDuration(int duration);
-    void setMaxSpeed(double maxSpeed);
     void setStartDate(QDateTime startDate);
     void setStopDate(QDateTime stopDate);
     void appendLocation(Location *location);
+    void calculateDistanceBetweenLocations();
 
     QString toString();
 };

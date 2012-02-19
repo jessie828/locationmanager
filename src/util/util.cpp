@@ -45,3 +45,9 @@ double Util::distanceInMeters(const Coordinate& from, const Coordinate& to)
 {
     return EARTH_RADIUS_IN_METERS * arcInRadians(from, to);
 }
+
+
+double Util::speedInMps(double distance, unsigned int time)
+{
+    return distance / time;
+}

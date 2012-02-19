@@ -43,7 +43,7 @@ bool Database::insert(Trip *trip)
     query.exec(queryString);
         if (!query.isActive())
         {
-            QMessageBox::warning(0, QObject::tr("Database Error"), query.lastError().text());
+            QMessageBox::warning(0, QObject::tr("Database Error while inserting a Trip"), query.lastError().text());
             return false;
         }
         return true;
@@ -62,7 +62,7 @@ bool Database::insert(Location *location)
     query.exec(queryString);
     if (!query.isActive())
     {
-        QMessageBox::warning(0, QObject::tr("Database Error"), query.lastError().text());
+        QMessageBox::warning(0, QObject::tr("Database Error while inserting a Locaiton"), query.lastError().text());
         return false;
     }
     return true;

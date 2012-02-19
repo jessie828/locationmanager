@@ -18,6 +18,8 @@ public:
 
     static double arcInRadians(const Coordinate& from, const Coordinate& to);
     static double distanceInMeters(const Coordinate& from, const Coordinate& to);
+
+    static double speedInMps(double distance, unsigned int time);
 };
 
 #endif /* UTIL_H_ */

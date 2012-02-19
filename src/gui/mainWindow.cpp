@@ -3,7 +3,7 @@
 #include "mainWindow.h"
 #include "importDialog.h"
 
-MainWindow::MainWindow(QWidget *parent)
+MainWindow::MainWindow()
 {
     setupUi(this);
 
@@ -13,6 +13,6 @@ MainWindow::MainWindow(QWidget *parent)
 
 void MainWindow::openImportDialog()
 {
-    ImportDialog *importDialog = new ImportDialog;
+    ImportDialog *importDialog = new ImportDialog(this);
     importDialog->show();
 }
