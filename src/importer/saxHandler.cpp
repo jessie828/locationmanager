@@ -1,6 +1,7 @@
 #include "saxHandler.h"
 
-QString TcxSaxHandler::dateFormat = "yyyy-MM-dd'T'hh:mm:ss'Z'";
+const QString TcxSaxHandler::DATEFORMAT = "yyyy-MM-dd'T'hh:mm:ss'Z'";
+const QString TcxSaxHandler::TCX = "tcx";
 
 TcxSaxHandler::TcxSaxHandler()
 {
@@ -26,7 +27,7 @@ bool TcxSaxHandler::startElement(const QString & /* namespaceURI */, const QStri
     {
         QDateTime startDate;
         QString startTime = attributes.value("StartTime");
-        startDate = QDateTime::fromString(startTime, TcxSaxHandler::dateFormat);
+        startDate = QDateTime::fromString(startTime, TcxSaxHandler::DATEFORMAT);
         m_trip->setStartDate(startDate);
     }
     else if (qName ==  "TotalTimeSeconds")
@@ -81,7 +82,7 @@ bool TcxSaxHandler::characters(const QString &str)
     }
     else if (m_time)
     {
-        QDateTime time = QDateTime::fromString(str, TcxSaxHandler::dateFormat);
+        QDateTime time = QDateTime::fromString(str, TcxSaxHandler::DATEFORMAT);
         m_location->setTime(time);
         m_time = false;
     }
@@ -139,11 +140,17 @@ bool TcxSaxHandler::fatalError(const QXmlParseException &exception)
 bool TcxSaxHandler::parseFile(const QString &fileName)
 {
     QFile file(fileName);
-    QXmlInputSource inputSource(&file);
-    QXmlSimpleReader reader;
-    TcxSaxHandler handler;
-    reader.setContentHandler(&handler);
-    reader.setErrorHandler(&handler);
-    return reader.parse(inputSource);
+    QFileInfo fileInfo(fileName);
+    QString extension = fileInfo.suffix();
+    if(extension == TcxSaxHandler::TCX)
+    {
+        QXmlInputSource inputSource(&file);
+        QXmlSimpleReader reader;
+        TcxSaxHandler handler;
+        reader.setContentHandler(&handler);
+        reader.setErrorHandler(&handler);
+        return reader.parse(inputSource);
+    }
+    return false;
 }
 

@@ -8,6 +8,7 @@
 #include <QXmlDefaultHandler>
 #include <QString>
 #include <QFile>
+#include <QFileInfo>
 #include <QMessageBox>
 #include <QXmlSimpleReader>
 
@@ -22,7 +23,8 @@ public:
     bool parseFile(const QString &fileName);
 
 public:
-    static QString dateFormat;
+    static const QString DATEFORMAT;
+    static const QString TCX;
 
 private:
     Location *m_location;

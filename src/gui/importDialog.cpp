@@ -15,8 +15,15 @@ void ImportDialog::import()
 {
     QString fileLocation = locationInputField->toPlainText();
     TcxSaxHandler handler;
-    handler.parseFile(fileLocation);
-    close();
+    bool parseSucessful = handler.parseFile(fileLocation);
+    if(!parseSucessful)
+    {
+        QMessageBox::warning(0, QObject::tr("Wrong file extension"), QString("You have selected a wrong file extension"));
+    }
+    else
+    {
+        close();
+    }
 }
 
 
