@@ -21,9 +21,19 @@ CREATE TABLE `Locations` (
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 #
-# Dumping data for table 'Locations'
+# Table structure for table 'Tank'
 #
 
+# DROP TABLE IF EXISTS Tank;
+CREATE TABLE `Tank` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `date` date NOT NULL,
+  `liters` double DEFAULT NULL,
+  `pricePerLiter` double DEFAULT NULL,
+  `mileage` int(11) DEFAULT NULL,
+  `location` text,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 #
 # Table structure for table 'Trips'
@@ -39,5 +49,5 @@ CREATE TABLE `Trips` (
   `average_speed` double DEFAULT NULL,
   `max_speed` double DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
