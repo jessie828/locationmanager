@@ -25,7 +25,7 @@ public:
     void setAltitude(double altitude);
     void setLatitude(double latitude);
     void setLongitude(double longitude);
-    void setTime(QDateTime time);
+    void setTime(const QDateTime &time);
 
     QString toString();
     double getDistance() const;

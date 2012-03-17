@@ -4,6 +4,8 @@
 #include "ui_mainWindow.h"
 #include "databaseConnection.h"
 
+#include <QDate>
+
 class MainWindow: public QMainWindow, private Ui::locationManagerMainWindow
 {
         Q_OBJECT
@@ -12,7 +14,9 @@ class MainWindow: public QMainWindow, private Ui::locationManagerMainWindow
         MainWindow();
 
     public slots:
-        void openImportDialog();
+        void openTripImportDialog();
+        void openTankImportDialog();
+        void fillOverviewList(QDate date);
 
 };
 

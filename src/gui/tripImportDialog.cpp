@@ -1,19 +1,23 @@
-#include <QtGui>
+#include "tripImportDialog.h"
 
-#include "importDialog.h"
-
-ImportDialog::ImportDialog(QWidget *parent)
+TripImportDialog::TripImportDialog(QWidget *parent) : QDialog(parent)
 {
     setupUi(this);
 
     connect(importButton, SIGNAL(clicked()), this, SLOT(import()));
     connect(browseButton, SIGNAL(clicked()), this, SLOT(browse()));
+    connect(cancelButton, SIGNAL(clicked()), this, SLOT(close()));
 }
 
 
-void ImportDialog::import()
+void TripImportDialog::import()
 {
-    QString fileLocation = locationInputField->toPlainText();
+    QString fileLocation = locationInputField->text();
+    if(fileLocation.isEmpty())
+    {
+        QMessageBox::warning(0, QObject::tr("Input Field Empty"), QString("The input field is empty.\nPlease select a valid file and try again."));
+        return;
+    }
     TcxSaxHandler handler;
     bool parseSucessful = handler.parseFile(fileLocation);
     if(!parseSucessful)
@@ -27,7 +31,7 @@ void ImportDialog::import()
 }
 
 
-void ImportDialog::browse()
+void TripImportDialog::browse()
 {
     QString path;
 

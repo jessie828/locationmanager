@@ -24,11 +24,13 @@ DESTDIR = $$LMNGT_SANDBOX_LIB
 
 # Input
 SOURCES += \
+           tank.cpp \
            trip.cpp \
            location.cpp \
            #
 
 HEADERS += \
+           tank.h \
            trip.h \
            location.h \
            #

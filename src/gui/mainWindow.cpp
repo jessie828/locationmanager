@@ -1,18 +1,39 @@
 #include <QtGui>
 
 #include "mainWindow.h"
-#include "importDialog.h"
+#include "tripImportDialog.h"
+#include "tankImportDialog.h"
 
 MainWindow::MainWindow()
 {
     setupUi(this);
 
-    connect(actionFrom_File, SIGNAL(activated()), this, SLOT(openImportDialog()));
+    connect(actionImport_Trip, SIGNAL(activated()), this, SLOT(openTripImportDialog()));
+    connect(actionImport_Tank, SIGNAL(activated()), this, SLOT(openTankImportDialog()));
+    connect(calendarWidget, SIGNAL(clicked(QDate)), this, SLOT(fillOverviewList(QDate)));
+    connect(actionExit, SIGNAL(activated()), this, SLOT(close()));
 }
 
 
-void MainWindow::openImportDialog()
+void MainWindow::openTripImportDialog()
 {
-    ImportDialog *importDialog = new ImportDialog(this);
-    importDialog->show();
+    TripImportDialog *tripimportDialog = new TripImportDialog(this);
+    tripimportDialog->show();
+}
+
+
+void MainWindow::openTankImportDialog()
+{
+    TankImportDialog *tankImportDialog = new TankImportDialog(this);
+    tankImportDialog->show();
+}
+
+
+void MainWindow::fillOverviewList(QDate date)
+{
+    QList<Trip*> trips;
+    QList<Tank*> tanks;
+    Database::getInstance()->getAllTrips(trips, date);
+    Database::getInstance()->getAllTanks(tanks, date);
+
 }

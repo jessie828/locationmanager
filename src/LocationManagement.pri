@@ -5,7 +5,7 @@
 #
 #
 
-CONFIG += release warn_on
+CONFIG += debug warn_on
 CONFIG += ordered
 
 OBJECTS_DIR = $$(LMNGT_BUILD)/obj

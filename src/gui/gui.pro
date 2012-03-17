@@ -39,16 +39,23 @@ UI_HEADERS_DIR = ./uic_headers
 # Input
 SOURCES += \
            mainWindow.cpp \
-           importDialog.cpp \
+           tripImportDialog.cpp \
+           tankImportDialog.cpp \
+           tripListItem.cpp \
+           tripTableItem.cpp \
            main.cpp \
            #
 
 HEADERS += \
            mainWindow.h \
-           importDialog.h \
+           tripImportDialog.h \
+           tankImportDialog.h \
+           tripListItem.h \
+           tripTableItem.h \
            #
 
 FORMS += \
          mainWindow.ui \
-         importDialog.ui \
+         tripImportDialog.ui \
+         tankImportDialog.ui \
          #

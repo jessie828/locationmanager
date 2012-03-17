@@ -68,7 +68,7 @@ void Location::setLongitude(double longitude)
     this->longitude = longitude;
 }
 
-void Location::setTime(QDateTime time)
+void Location::setTime(const QDateTime &time)
 {
     this->time = time;
 }

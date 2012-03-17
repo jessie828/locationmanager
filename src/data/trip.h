@@ -38,6 +38,8 @@ public:
     void setStopDate(QDateTime stopDate);
     void appendLocation(Location *location);
     void calculateDistanceBetweenLocations();
+    void setAvgSpeed(double avgSpeed);
+    void setMaxSpeed(double maxSpeed);
 
     QString toString();
 };

@@ -3,6 +3,7 @@
 
 #include "location.h"
 #include "trip.h"
+#include "tank.h"
 #include <stdio.h>
 
 #include <QSqlDatabase>
@@ -20,7 +21,10 @@ public:
     bool createConnection();
     bool insert(Trip *trip);
     bool insert(Location *location);
+    bool insert(Tank *tank);
     int getLastTripId() const;
+    bool getAllTrips(QList<Trip*> &trips, const QDate &date);
+    bool getAllTanks(QList<Tank*> &tanks, const QDate &date);
     ~Database();
 
 protected:

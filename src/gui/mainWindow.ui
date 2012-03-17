@@ -129,7 +129,7 @@
      <bool>true</bool>
     </property>
    </widget>
-   <widget class="QListView" name="tripViews">
+   <widget class="QListWidget" name="tripViews">
     <property name="geometry">
      <rect>
       <x>10</x>
@@ -160,12 +160,31 @@
     <property name="title">
      <string>Import</string>
     </property>
-    <addaction name="actionFrom_File"/>
+    <widget class="QMenu" name="menuTrip">
+     <property name="title">
+      <string>Trip</string>
+     </property>
+     <addaction name="actionImport_Trip"/>
+    </widget>
+    <widget class="QMenu" name="menuTank">
+     <property name="title">
+      <string>Tank</string>
+     </property>
+     <addaction name="actionImport_Tank"/>
+    </widget>
+    <addaction name="menuTrip"/>
+    <addaction name="separator"/>
+    <addaction name="menuTank"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuImport"/>
   </widget>
-  <action name="actionFrom_File">
+  <action name="actionExit">
+   <property name="text">
+    <string>Exit</string>
+   </property>
+  </action>
+  <action name="actionImport_Trip">
    <property name="text">
     <string>From File ...</string>
    </property>
@@ -173,29 +192,15 @@
     <string>Ctrl+I</string>
    </property>
   </action>
-  <action name="actionExit">
+  <action name="actionImport_Tank">
    <property name="text">
-    <string>Exit</string>
+    <string>Import Tank</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+T</string>
    </property>
   </action>
  </widget>
  <resources/>
- <connections>
-  <connection>
-   <sender>actionExit</sender>
-   <signal>activated()</signal>
-   <receiver>locationManagerMainWindow</receiver>
-   <slot>close()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>-1</x>
-     <y>-1</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>397</x>
-     <y>287</y>
-    </hint>
-   </hints>
-  </connection>
- </connections>
+ <connections/>
 </ui>

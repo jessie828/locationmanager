@@ -133,16 +133,28 @@ void Trip::setStopDate(QDateTime stopDate)
 }
 
 
+void Trip::setAvgSpeed(double avgSpeed)
+{
+    this->avgSpeed = avgSpeed;
+}
+
+
+void Trip::setMaxSpeed(double maxSpeed)
+{
+    this->maxSpeed = maxSpeed;
+}
+
+
 QString Trip::toString()
 {
     QString dateFormat = QString("yyyy-MM-dd'T'hh:mm:ss'Z'");
-    QString locationString;
-    locationString = "startDate = " + QString(startDate.toString(dateFormat)) +
+    QString tripString;
+    tripString = "startDate = " + QString(startDate.toString(dateFormat)) +
         " stopDate = " + QString(stopDate.toString(dateFormat)) +
         " duration = " + QString::number(duration) +
         " distance = " + QString::number(distance) +
         " avgSpeed = " + QString::number(maxSpeed) +
         " location count = " + QString::number(locations.size());
-    return locationString;
+    return tripString;
 }
 
