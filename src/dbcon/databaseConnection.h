@@ -23,8 +23,8 @@ public:
     bool insert(Location *location);
     bool insert(Tank *tank);
     int getLastTripId() const;
-    bool getAllTrips(QList<Trip*> &trips, const QDate &date);
-    bool getAllTanks(QList<Tank*> &tanks, const QDate &date);
+    QList<Trip> getAllTrips(const QDate &date);
+    QList<Tank> getAllTanks(const QDate &date);
     ~Database();
 
 protected:

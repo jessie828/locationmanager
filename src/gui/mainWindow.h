@@ -5,6 +5,7 @@
 #include "databaseConnection.h"
 
 #include <QDate>
+#include <QListWidgetItem>
 
 class MainWindow: public QMainWindow, private Ui::locationManagerMainWindow
 {
@@ -13,11 +14,15 @@ class MainWindow: public QMainWindow, private Ui::locationManagerMainWindow
     public:
         MainWindow();
 
+    private:
+        QString durationToString(int duration) const;
+
     public slots:
         void openTripImportDialog();
         void openMultiTripImportDialog();
         void openTankImportDialog();
         void fillOverviewList(QDate date);
+        void fillTable(QDate date);
 
 };
 
