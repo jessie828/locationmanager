@@ -1,6 +1,6 @@
 #include "saxHandler.h"
 
-const QString TcxSaxHandler::DATEFORMAT = "yyyy-MM-dd'T'hh:mm:ss'Z'";
+const QString TcxSaxHandler::DATEFORMAT = "yyyy-MM-ddThh:mm:ss.zzzZ";
 const QString TcxSaxHandler::TCX = "tcx";
 
 TcxSaxHandler::TcxSaxHandler()
@@ -25,9 +25,8 @@ bool TcxSaxHandler::startElement(const QString & /* namespaceURI */, const QStri
     }
     else if (qName == "Lap")
     {
-        QDateTime startDate;
         QString startTime = attributes.value("StartTime");
-        startDate = QDateTime::fromString(startTime, TcxSaxHandler::DATEFORMAT);
+        QDateTime startDate = QDateTime::fromString(startTime, TcxSaxHandler::DATEFORMAT);
         m_trip->setStartDate(startDate);
     }
     else if (qName ==  "TotalTimeSeconds")
