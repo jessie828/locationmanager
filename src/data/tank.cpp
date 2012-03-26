@@ -1,73 +1,84 @@
 #include "tank.h"
 
 
+int Tank::getId() const
+{
+    return m_id;
+}
+
 QDate Tank::getDate() const
 {
-    return date;
+    return m_date;
 }
 
 
 double Tank::getLiters() const
 {
-    return liters;
+    return m_liters;
 }
 
 
 QString Tank::getLocation() const
 {
-    return location;
+    return m_location;
 }
 
 
 int Tank::getMileage() const
 {
-    return mileage;
+    return m_mileage;
 }
 
 
 double Tank::getPricePerLiter() const
 {
-    return pricePerLiter;
+    return m_pricePerLiter;
+}
+
+
+void Tank::setId(int id)
+{
+    this->m_id = id;
 }
 
 
 void Tank::setDate(const QDate &date)
 {
-    this->date = date;
+    this->m_date = date;
 }
 
 
 void Tank::setLiters(double liters)
 {
-    this->liters = liters;
+    this->m_liters = liters;
 }
 
 
-void Tank::setLocation(QString location)
+void Tank::setLocation(const QString &location)
 {
-    this->location = location;
+    this->m_location = location;
 }
 
 
 void Tank::setMileage(int mileage)
 {
-    this->mileage = mileage;
+    this->m_mileage = mileage;
 }
 
 
 void Tank::setPricePerLiter(double pricePerLiter)
 {
-    this->pricePerLiter = pricePerLiter;
+    this->m_pricePerLiter = pricePerLiter;
 }
 
 
-QString Tank::toString()
+QString Tank::toString() const
 {
     QString tankString;
-    tankString = "date = " + QString(date.toString(QString("yyyy-MM-dd"))) +
-        " liters = " + QString(QString::number(liters)) +
-        " price per liter = " + QString::number(pricePerLiter) +
-        " mileage = " + QString::number(mileage) +
-        " location = " + location;
+    tankString = "date = " + QString(m_date.toString(QString("yyyy-MM-dd"))) +
+        " liters = " + QString(QString::number(m_liters)) +
+        " price per liter = " + QString::number(m_pricePerLiter) +
+        " mileage = " + QString::number(m_mileage) +
+        " location = " + m_location;
     return tankString;
 }

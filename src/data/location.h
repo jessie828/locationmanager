@@ -6,14 +6,14 @@
 class Location
 {
 private:
-    int tripId;
-    QDateTime time;
-    double altitude;
-    double latitude;
-    double longitude;
+    int m_tripId;
+    QDateTime m_time;
+    double m_altitude;
+    double m_latitude;
+    double m_longitude;
 
-    double distance;
-    double speedMPS;
+    double m_distance;
+    double m_speedMPS;
 
 public:
     int getTripId() const;
@@ -27,7 +27,7 @@ public:
     void setLongitude(double longitude);
     void setTime(const QDateTime &time);
 
-    QString toString();
+    QString toString() const;
     double getDistance() const;
     double getSpeedMps() const;
     void setDistance(double distance);

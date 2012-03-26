@@ -3,81 +3,81 @@
 
 int Location::getTripId() const
 {
-    return tripId;
+    return m_tripId;
 }
 
 
 double Location::getAltitude() const
 {
-    return altitude;
+    return m_altitude;
 }
 
 double Location::getLatitude() const
 {
-    return latitude;
+    return m_latitude;
 }
 
 double Location::getLongitude() const
 {
-    return longitude;
+    return m_longitude;
 }
 
 QDateTime Location::getTime() const
 {
-    return time;
+    return m_time;
 }
 
 void Location::setTripId(int tripId)
 {
-    this->tripId = tripId;
+    m_tripId = tripId;
 }
 
 
 void Location::setAltitude(double altitude)
 {
-    this->altitude = altitude;
+    m_altitude = altitude;
 }
 
 void Location::setLatitude(double latitude)
 {
-    this->latitude = latitude;
+    m_latitude = latitude;
 }
 
 double Location::getDistance() const
 {
-    return distance;
+    return m_distance;
 }
 
 double Location::getSpeedMps() const
 {
-    return speedMPS;
+    return m_speedMPS;
 }
 
 void Location::setDistance(double distance)
 {
-    this->distance = distance;
+    m_distance = distance;
 }
 
 void Location::setSpeedMps(double speedMps)
 {
-    speedMPS = speedMps;
+    m_speedMPS = speedMps;
 }
 
 void Location::setLongitude(double longitude)
 {
-    this->longitude = longitude;
+    m_longitude = longitude;
 }
 
 void Location::setTime(const QDateTime &time)
 {
-    this->time = time;
+    m_time = time;
 }
 
-QString Location::toString()
+QString Location::toString() const
 {
     QString dateFormat = QString("yyyy-MM-dd'T'hh:mm:ss'Z'");
     QString locationString;
-    locationString = "Time: " + QString(time.toString(dateFormat)) +
+    locationString = "Time: " + QString(m_time.toString(dateFormat)) +
         " altitude: " + QString::number(getAltitude()) +
         " latitude: " + QString::number(getLatitude()) +
         " longitude: " + QString::number(getLongitude());

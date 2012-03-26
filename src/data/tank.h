@@ -7,25 +7,28 @@
 class Tank
 {
 private:
-    QDate date;
-    double liters;
-    double pricePerLiter;
-    int mileage;
-    QString location;
+    int m_id;
+    QDate m_date;
+    double m_liters;
+    double m_pricePerLiter;
+    int m_mileage;
+    QString m_location;
 
 public:
+    int getId() const;
     QDate getDate() const;
     double getLiters() const;
     QString getLocation() const;
     int getMileage() const;
     double getPricePerLiter() const;
+    void setId(int id);
     void setDate(const QDate &date);
     void setLiters(double liters);
-    void setLocation(QString location);
+    void setLocation(const QString &location);
     void setMileage(int mileage);
     void setPricePerLiter(double pricePerLiter);
 
-    QString toString();
+    QString toString() const;
 };
 
 #endif /* TANK_H_ */

@@ -12,36 +12,39 @@
 class Trip
 {
 private:
-    int id;
-    QDateTime startDate;
-    QDateTime stopDate;
-    int duration;
-    int distance;
-    double avgSpeed;
-    double maxSpeed;
-    QList<Location*> locations;
+    int m_id;
+    QDateTime m_startDate;
+    QDateTime m_stopDate;
+    int m_duration;
+    int m_distance;
+    double m_avgSpeed;
+    double m_maxSpeed;
+    QList<Location*> m_locations;
 
 public:
     Trip(int id);
     int getId() const;
+    double calculateAvgSpeed() const;
     double getAvgSpeed() const;
+    int calculateDistance() const;
     int getDistance() const;
     int getDuration() const;
     QList<Location*> getLocations() const;
+    double calculateMaxSpeed() const;
     double getMaxSpeed() const;
     QDateTime getStartDate() const;
     QDateTime getStopDate() const;
     void setDistance(int distance);
     void calculateSpeed();
     void setDuration(int duration);
-    void setStartDate(QDateTime startDate);
-    void setStopDate(QDateTime stopDate);
+    void setStartDate(const QDateTime &startDate);
+    void setStopDate(const QDateTime &stopDate);
     void appendLocation(Location *location);
     void calculateDistanceBetweenLocations();
     void setAvgSpeed(double avgSpeed);
     void setMaxSpeed(double maxSpeed);
 
-    QString toString();
+    QString toString() const;
 };
 
 #endif /* TRIP_H_ */
