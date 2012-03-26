@@ -40,6 +40,7 @@ UI_HEADERS_DIR = ./uic_headers
 SOURCES += \
            mainWindow.cpp \
            tripImportDialog.cpp \
+           multiTripImportDialog.cpp \
            tankImportDialog.cpp \
            tripListItem.cpp \
            tripTableItem.cpp \
@@ -49,6 +50,7 @@ SOURCES += \
 HEADERS += \
            mainWindow.h \
            tripImportDialog.h \
+           multiTripImportDialog.h \
            tankImportDialog.h \
            tripListItem.h \
            tripTableItem.h \
@@ -57,5 +59,6 @@ HEADERS += \
 FORMS += \
          mainWindow.ui \
          tripImportDialog.ui \
+         multiTripImportDialog.ui \
          tankImportDialog.ui \
          #

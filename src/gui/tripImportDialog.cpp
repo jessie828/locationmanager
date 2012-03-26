@@ -38,7 +38,7 @@ void TripImportDialog::browse()
     path = QFileDialog::getOpenFileName(
         this,
         "Choose a file to open",
-        "/media/nas/Jessie/tracks",
+        "/home/jessie/my_tracks/tcx",
         QString::null);
 
     locationInputField->setText( path );

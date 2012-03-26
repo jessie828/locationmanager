@@ -15,6 +15,7 @@ class MainWindow: public QMainWindow, private Ui::locationManagerMainWindow
 
     public slots:
         void openTripImportDialog();
+        void openMultiTripImportDialog();
         void openTankImportDialog();
         void fillOverviewList(QDate date);
 
