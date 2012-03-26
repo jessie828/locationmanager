@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>965</width>
+    <width>1117</width>
     <height>576</height>
    </rect>
   </property>
@@ -19,7 +19,7 @@
      <rect>
       <x>330</x>
       <y>30</y>
-      <width>631</width>
+      <width>781</width>
       <height>491</height>
      </rect>
     </property>
@@ -35,7 +35,7 @@
        <rect>
         <x>10</x>
         <y>10</y>
-        <width>611</width>
+        <width>761</width>
         <height>441</height>
        </rect>
       </property>
@@ -138,6 +138,11 @@
       <height>281</height>
      </rect>
     </property>
+    <item>
+     <property name="text">
+      <string>--- None ---</string>
+     </property>
+    </item>
    </widget>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
@@ -146,7 +151,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>965</width>
+     <width>1117</width>
      <height>25</height>
     </rect>
    </property>
