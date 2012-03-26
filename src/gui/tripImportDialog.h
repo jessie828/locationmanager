@@ -1,5 +1,5 @@
 #ifndef TRIPIMPORTDIALOG_H
-#define TRIPIMOPRTDIALOG_H
+#define TRIPIMPORTDIALOG_H
 
 #include "ui_tripImportDialog.h"
 #include <QtGui>
