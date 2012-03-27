@@ -42,7 +42,6 @@ SOURCES += \
            tripImportDialog.cpp \
            multiTripImportDialog.cpp \
            tankImportDialog.cpp \
-           tripTableItem.cpp \
            main.cpp \
            #
 
@@ -51,7 +50,6 @@ HEADERS += \
            tripImportDialog.h \
            multiTripImportDialog.h \
            tankImportDialog.h \
-           tripTableItem.h \
            #
 
 FORMS += \
