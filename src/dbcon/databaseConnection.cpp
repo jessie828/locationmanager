@@ -14,6 +14,7 @@ Database* Database::getInstance()
 
 bool Database::createConnection()
 {
+    //TODO make this configureable so you dont have to recompile when you need to test.
     m_db = QSqlDatabase::database("location");
     m_db = QSqlDatabase::addDatabase("QMYSQL");
     m_db.setHostName("localhost");

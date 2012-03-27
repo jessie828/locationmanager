@@ -3,16 +3,7 @@
 
 #include "ui_mainWindow.h"
 #include "databaseConnection.h"
-
-#include <stdlib.h>
-#include <qpen.h>
-#include <qwt_plot_layout.h>
-#include <qwt_legend.h>
-#include <qwt_legend_item.h>
-#include <qwt_plot_grid.h>
-#include <qwt_plot_histogram.h>
-#include <qwt_column_symbol.h>
-#include <qwt_series_data.h>
+#include "histogram.h"
 
 #include <QDate>
 #include <QListWidgetItem>
@@ -23,6 +14,7 @@ class MainWindow: public QMainWindow, private Ui::locationManagerMainWindow
 
     public:
         MainWindow();
+        void paintMontlyAvgSpeed(int month);
 
     private:
         QString durationToString(int duration) const;

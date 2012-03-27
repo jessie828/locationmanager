@@ -4,6 +4,7 @@
 #include "tripImportDialog.h"
 #include "tankImportDialog.h"
 #include "multiTripImportDialog.h"
+#include "plot.h"
 
 #define SECS_PER_MIN 60
 #define SECS_PER_HOUR 3600
@@ -107,5 +108,12 @@ QString MainWindow::durationToString(int duration) const
     durationStr = QString("%1h:%2m:%3s").arg(hours).arg(mins_left).arg(secs_left);
     return durationStr;
 
+}
+
+
+void MainWindow::paintMontlyAvgSpeed(int month)
+{
+    //TODO implement me!!
+    //this method wil fill the graph tab.
 }
 

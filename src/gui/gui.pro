@@ -45,6 +45,8 @@ SOURCES += \
            tripImportDialog.cpp \
            multiTripImportDialog.cpp \
            tankImportDialog.cpp \
+           histogram.cpp \
+           plot.cpp \
            main.cpp \
            #
 
@@ -53,6 +55,8 @@ HEADERS += \
            tripImportDialog.h \
            multiTripImportDialog.h \
            tankImportDialog.h \
+           histogram.h \
+           plot.h \
            #
 
 FORMS += \
