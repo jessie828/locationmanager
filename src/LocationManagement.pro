@@ -5,6 +5,7 @@
 TEMPLATE = subdirs
 
 CONFIG += ordered
+CONFIG += qwt
 
 SUBDIRS = \
           data \

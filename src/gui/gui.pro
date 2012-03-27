@@ -15,6 +15,7 @@ CONFIG += no_lflags_merge
 
 INCLUDEPATH += \
               ./uic_headers/ \
+              $$QWT_SRC/ \
               $$LMNGT_SANDBOX_SRC/dbcon/ \
               $$LMNGT_SANDBOX_SRC/data/ \
               $$LMNGT_SANDBOX_SRC/importer/ \
@@ -22,11 +23,13 @@ INCLUDEPATH += \
               #
 
 LIBS += \
+        -L$$QWT_LIB \
         -L$$LMNGT_SANDBOX_LIB \
         -limporter \
         -ldata \
         -ldbcon \
         -lutil \
+        -lqwt \
         #
 
 TARGET = locationManager.exe

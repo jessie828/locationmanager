@@ -17,6 +17,10 @@ LMNGT_SANDBOX_INC = $$LMNGT_SANDBOX/include
 LMNGT_SANDBOX_SRC = $$LMNGT_SANDBOX/src
 LMNGT_SANDBOX_MOC = ./moc_cpp
 
+QWT_DIR = $$(QWT)
+QWT_LIB = $$QWT_DIR/lib
+QWT_SRC = $$QWT_DIR/src
+
 QT += sql
 QT += xml
 
