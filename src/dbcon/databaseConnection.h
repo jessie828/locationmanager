@@ -25,6 +25,7 @@ public:
     int getLastTripId() const;
     QList<Trip> getAllTrips(const QDate &date);
     QList<Tank> getAllTanks(const QDate &date);
+    QList<Trip> getAllTripsLocations(const QDate &date, int time);
     ~Database();
 
 protected:
@@ -33,6 +34,7 @@ protected:
 private:
     QSqlDatabase m_db;
     static Database* m_instance;
+    QDate findFirstDayOfWeek(const QDate &date);
 
 };
 

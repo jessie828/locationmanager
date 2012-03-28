@@ -19,7 +19,7 @@ MainWindow::MainWindow()
     connect(actionExit, SIGNAL(activated()), this, SLOT(close()));
     connect(actionImport_multiTrips, SIGNAL(activated()), this, SLOT(openMultiTripImportDialog()));
 
-    connect(tabWidget, SIGNAL(currentChanged(int)), this, SLOT(paintMontlyAvgSpeed(int)));
+    connect(tabWidget, SIGNAL(currentChanged(int)), this, SLOT(paintGraph(int)));
 }
 
 
@@ -112,56 +112,19 @@ QString MainWindow::durationToString(int duration) const
 }
 
 
-void MainWindow::paintMontlyAvgSpeed(int tabId)
+void MainWindow::paintGraph(int tabId)
 {
+    //TODO need to redraw when timeType and speedType change.
     if(tabId == 1)
     {
+        setupPlotArea();
         int time = timeType->currentIndex();
         int speed = speedType->currentIndex();
-        printf("clicked on date when in the graph view\n");
         QDate date = calendarWidget->selectedDate();
 
-        grid->setCanvasBackground( QColor( Qt::gray ) );
-        grid->plotLayout()->setAlignCanvasToScales( true );
+        QList<Trip> trips = Database::getInstance()->getAllTripsLocations(date, time);
 
-        grid->setAxisTitle( QwtPlot::yLeft, "Number of People" );
-        grid->setAxisTitle( QwtPlot::xBottom, "Number of Hours" );
-
-        QwtLegend *legend = new QwtLegend;
-        legend->setItemMode( QwtLegend::CheckableItem );
-        grid->insertLegend( legend, QwtPlot::RightLegend );
-
-        grid->replot(); // creating the legend items
-
-        QwtPlotItemList items = grid->itemList( QwtPlotItem::Rtti_PlotHistogram );
-        for ( int i = 0; i < items.size(); i++ )
-        {
-            if ( i == 0 )
-            {
-                QwtLegendItem *legendItem =
-                    qobject_cast<QwtLegendItem *>( legend->find( items[i] ) );
-                if ( legendItem )
-                    legendItem->setChecked( true );
-
-                items[i]->setVisible( true );
-            }
-            else
-                items[i]->setVisible( false );
-        }
-
-        grid->setAutoReplot( true );
-
-        QwtPlotGrid *plotgrid = new QwtPlotGrid;
-        plotgrid->enableX( false );
-        plotgrid->enableY( true );
-        plotgrid->enableXMin( false );
-        plotgrid->enableYMin( false );
-        plotgrid->setMajPen( QPen( Qt::black, 0, Qt::DotLine ) );
-        plotgrid->attach( grid );
-
-        QList<double> values;
-        values.append(400.0);
-        values.append(300.0);
+        QList<double> values = calculateSpeeds(trips, speed);
         populate(values);
     }
 }
@@ -169,8 +132,51 @@ void MainWindow::paintMontlyAvgSpeed(int tabId)
 
 void MainWindow::populate(const QList<double> &values)
 {
+    //TODO need to remove old graphs before displaying new.
     Histogram *histogram = new Histogram( "Speed", Qt::red );
     histogram->setValues(values.size(), values );
     histogram->attach( grid );
+}
+
+
+QList<double> MainWindow::calculateSpeeds(const QList<Trip> &trips, int speed)
+{
+    QList<double> values;
+    if(speed == 0)
+    {
+        for(int i = 0; i < trips.size(); i++)
+        {
+            values.append(trips.at(i).getMaxSpeed());
+        }
+    }
+    else if(speed == 1)
+    {
+        for(int i = 0; i < trips.size(); i++)
+        {
+            values.append(trips.at(i).getAvgSpeed());
+        }
+    }
+    return values;
+}
+
+
+void MainWindow::setupPlotArea()
+{
+    grid->setCanvasBackground( QColor( Qt::gray ) );
+    grid->plotLayout()->setAlignCanvasToScales( true );
+
+    //TODO here is axistitles.
+//        grid->setAxisTitle( QwtPlot::yLeft, "Speed" );
+//        grid->setAxisTitle( QwtPlot::xBottom, "Number of Hours" );
+
+    grid->replot(); // creating the legend items
+    grid->setAutoReplot( true );
+
+    QwtPlotGrid *plotgrid = new QwtPlotGrid;
+    plotgrid->enableX( false );
+    plotgrid->enableY( true );
+    plotgrid->enableXMin( false );
+    plotgrid->enableYMin( true );
+    plotgrid->attach( grid );
 }
 

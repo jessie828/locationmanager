@@ -175,8 +175,99 @@ QList<Tank> Database::getAllTanks(const QDate &date)
 }
 
 
+QList<Trip> Database::getAllTripsLocations(const QDate &date, int time)
+{
+    QString dateFormat = "yyyy-MM-dd";
+    QSqlQuery query;
+    QString queryString = QString("SELECT * FROM Trips ");
+    if(time == 0)
+    {
+        int year = date.year();
+        QDate startDate, borderDate;
+        startDate.setDate(year, 1, 1);
+        borderDate.setDate(startDate.year(), 12, 31);
+        queryString += QString("WHERE startdate BETWEEN '%1' AND '%2'")
+            .arg(startDate.toString(dateFormat))
+            .arg(borderDate.toString(dateFormat));
+    }
+    else if(time == 1)
+    {
+        int month = date.month();
+        QDate startDate, borderDate;
+        startDate.setDate(date.year(), month, 1);
+        borderDate.setDate(startDate.year(), startDate.month(), startDate.daysInMonth());
+        queryString += QString("WHERE startdate BETWEEN '%1' AND '%2'")
+            .arg(startDate.toString(dateFormat))
+            .arg(borderDate.toString(dateFormat));
+    }
+    else if(time == 2)
+    {
+        QDate startDate = findFirstDayOfWeek(date);
+        QDate borderDate = date.addDays(7);
+        queryString += QString("WHERE startdate BETWEEN '%1' AND '%2'")
+            .arg(startDate.toString(dateFormat))
+            .arg(borderDate.toString(dateFormat));
+    }
+
+    query.exec(queryString);
+    if(!query.isActive())
+    {
+        QMessageBox::warning(0, QObject::tr("Database Error"), query.lastError().text());
+    }
+
+    QList<Trip> trips;
+    QString returnDateFormat = "yyyy-MM-dd'T'hh:mm:ss";
+    while(query.next())
+    {
+        int tripId = query.value(0).toInt();
+        Trip newTrip(tripId);
+        newTrip.setStartDate(QDateTime::fromString(query.value(1).toString(), returnDateFormat));
+        newTrip.setStopDate(QDateTime::fromString(query.value(2).toString(), returnDateFormat));
+        newTrip.setDuration(query.value(3).toInt());
+        newTrip.setDistance(query.value(4).toInt());
+        newTrip.setAvgSpeed(query.value(5).toDouble());
+        newTrip.setMaxSpeed(query.value(6).toDouble());
+
+        trips.append(newTrip);
+    }
+
+    return trips;
+}
+
+
 Database::Database()
 {
+}
+
+
+QDate Database::findFirstDayOfWeek(const QDate &date)
+{
+    QDate mondayDate = date;
+    switch (date.dayOfWeek())
+    {
+     case 1:
+         break;
+     case 2:
+         mondayDate = date.addDays(-1);
+         break;
+     case 3:
+         mondayDate = date.addDays(-2);
+         break;
+     case 4:
+         mondayDate = date.addDays(-3);
+         break;
+     case 5:
+         mondayDate = date.addDays(-4);
+         break;
+     case 6:
+         mondayDate = date.addDays(-5);
+         break;
+     case 7:
+         mondayDate = date.addDays(-6);
+         break;
+    }
+
+    return mondayDate;
 }
 
 

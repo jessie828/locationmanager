@@ -18,6 +18,8 @@ class MainWindow: public QMainWindow, private Ui::locationManagerMainWindow
 
     private:
         QString durationToString(int duration) const;
+        void setupPlotArea();
+        QList<double> calculateSpeeds(const QList<Trip> &trips, int speed);
 
     public slots:
         void openTripImportDialog();
@@ -25,7 +27,7 @@ class MainWindow: public QMainWindow, private Ui::locationManagerMainWindow
         void openTankImportDialog();
         void fillOverviewList(QDate date);
         void fillTable(QDate date);
-        void paintMontlyAvgSpeed(int tabId);
+        void paintGraph(int tabId);
 
 };
 
