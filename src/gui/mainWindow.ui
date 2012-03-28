@@ -75,18 +75,60 @@
      <attribute name="title">
       <string>GraphView</string>
      </attribute>
-     <widget class="QLabel" name="label_2">
+     <widget class="QwtPlot" name="grid">
       <property name="geometry">
        <rect>
-        <x>120</x>
-        <y>140</y>
-        <width>441</width>
-        <height>161</height>
+        <x>-1</x>
+        <y>29</y>
+        <width>771</width>
+        <height>431</height>
        </rect>
       </property>
-      <property name="text">
-       <string>This is going to contain a graph of statistics for the selected trip</string>
+     </widget>
+     <widget class="QComboBox" name="timeType">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>91</width>
+        <height>27</height>
+       </rect>
       </property>
+      <item>
+       <property name="text">
+        <string>Yearly</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Monthly</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Weekly</string>
+       </property>
+      </item>
+     </widget>
+     <widget class="QComboBox" name="speedType">
+      <property name="geometry">
+       <rect>
+        <x>100</x>
+        <y>0</y>
+        <width>141</width>
+        <height>27</height>
+       </rect>
+      </property>
+      <item>
+       <property name="text">
+        <string>Max Speed</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Average Speed</string>
+       </property>
+      </item>
      </widget>
     </widget>
     <widget class="QWidget" name="mapTab">
@@ -216,6 +258,13 @@
    </property>
   </action>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>QwtPlot</class>
+   <extends>QFrame</extends>
+   <header>qwt_plot.h</header>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>

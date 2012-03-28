@@ -4,7 +4,6 @@
 #include "tripImportDialog.h"
 #include "tankImportDialog.h"
 #include "multiTripImportDialog.h"
-#include "plot.h"
 
 #define SECS_PER_MIN 60
 #define SECS_PER_HOUR 3600
@@ -19,6 +18,8 @@ MainWindow::MainWindow()
     connect(calendarWidget, SIGNAL(clicked(QDate)), this, SLOT(fillTable(QDate)));
     connect(actionExit, SIGNAL(activated()), this, SLOT(close()));
     connect(actionImport_multiTrips, SIGNAL(activated()), this, SLOT(openMultiTripImportDialog()));
+
+    connect(tabWidget, SIGNAL(currentChanged(int)), this, SLOT(paintMontlyAvgSpeed(int)));
 }
 
 
@@ -111,9 +112,65 @@ QString MainWindow::durationToString(int duration) const
 }
 
 
-void MainWindow::paintMontlyAvgSpeed(int month)
+void MainWindow::paintMontlyAvgSpeed(int tabId)
 {
-    //TODO implement me!!
-    //this method wil fill the graph tab.
+    if(tabId == 1)
+    {
+        int time = timeType->currentIndex();
+        int speed = speedType->currentIndex();
+        printf("clicked on date when in the graph view\n");
+        QDate date = calendarWidget->selectedDate();
+
+        grid->setCanvasBackground( QColor( Qt::gray ) );
+        grid->plotLayout()->setAlignCanvasToScales( true );
+
+        grid->setAxisTitle( QwtPlot::yLeft, "Number of People" );
+        grid->setAxisTitle( QwtPlot::xBottom, "Number of Hours" );
+
+        QwtLegend *legend = new QwtLegend;
+        legend->setItemMode( QwtLegend::CheckableItem );
+        grid->insertLegend( legend, QwtPlot::RightLegend );
+
+        grid->replot(); // creating the legend items
+
+        QwtPlotItemList items = grid->itemList( QwtPlotItem::Rtti_PlotHistogram );
+        for ( int i = 0; i < items.size(); i++ )
+        {
+            if ( i == 0 )
+            {
+                QwtLegendItem *legendItem =
+                    qobject_cast<QwtLegendItem *>( legend->find( items[i] ) );
+                if ( legendItem )
+                    legendItem->setChecked( true );
+
+                items[i]->setVisible( true );
+            }
+            else
+                items[i]->setVisible( false );
+        }
+
+        grid->setAutoReplot( true );
+
+        QwtPlotGrid *plotgrid = new QwtPlotGrid;
+        plotgrid->enableX( false );
+        plotgrid->enableY( true );
+        plotgrid->enableXMin( false );
+        plotgrid->enableYMin( false );
+        plotgrid->setMajPen( QPen( Qt::black, 0, Qt::DotLine ) );
+        plotgrid->attach( grid );
+
+        QList<double> values;
+        values.append(400.0);
+        values.append(300.0);
+        populate(values);
+    }
+}
+
+
+void MainWindow::populate(const QList<double> &values)
+{
+    Histogram *histogram = new Histogram( "Speed", Qt::red );
+    histogram->setValues(values.size(), values );
+    histogram->attach( grid );
 }
 

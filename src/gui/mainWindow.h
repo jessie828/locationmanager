@@ -14,7 +14,7 @@ class MainWindow: public QMainWindow, private Ui::locationManagerMainWindow
 
     public:
         MainWindow();
-        void paintMontlyAvgSpeed(int month);
+        void populate(const QList<double> &values);
 
     private:
         QString durationToString(int duration) const;
@@ -25,6 +25,7 @@ class MainWindow: public QMainWindow, private Ui::locationManagerMainWindow
         void openTankImportDialog();
         void fillOverviewList(QDate date);
         void fillTable(QDate date);
+        void paintMontlyAvgSpeed(int tabId);
 
 };
 

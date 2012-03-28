@@ -17,7 +17,7 @@ public:
     Histogram( const QString &, const QColor & );
 
     void setColor( const QColor & );
-    void setValues( uint numValues, const double * );
+    void setValues( int numValues, const QList<double> &values );
 };
 
 #endif /* HISTOGRAM_H_ */
