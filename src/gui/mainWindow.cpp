@@ -69,18 +69,18 @@ void MainWindow::fillOverviewList(QDate date)
 void MainWindow::fillTable(QDate date)
 {
     tableWidget->hide();
+    tableWidget->clearContents();
     QList<Trip> trips = Database::getInstance()->getAllTrips(date);
 
     QStringList HorizontalLabels;
     HorizontalLabels << tr("startDate") << tr("EndDate") << tr("Duration") << tr("Distance") << tr("average Speed") << tr("Maximum speed");
-    tableWidget->setRowCount(trips.size() -2);
+    tableWidget->setRowCount(trips.size());
     tableWidget->setColumnCount(HorizontalLabels.size());
     tableWidget->setHorizontalHeaderLabels(HorizontalLabels);
     tableWidget->setShowGrid(true);
 
     for(int i = 0; i < trips.size(); i++)
     {
-        tableWidget->insertRow(i);
         tableWidget->setItem(i, 0, new QTableWidgetItem(trips.at(i).getStartDate().toString("yyyy-MM-dd h:mm AP")));
         tableWidget->setItem(i, 1, new QTableWidgetItem(trips.at(i).getStopDate().toString("yyyy-MM-dd h:mm AP")));
         tableWidget->setItem(i, 2, new QTableWidgetItem(durationToString(trips.at(i).getDuration())));
