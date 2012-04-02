@@ -132,7 +132,12 @@ void MainWindow::paintGraph(int tabId)
 
 void MainWindow::populate(const QList<double> &values)
 {
-    //TODO need to remove old graphs before displaying new.
+    QwtPlotItemList items = grid->itemList(QwtPlotItem::Rtti_PlotHistogram);
+    for(int i = 0; i < items.size(); i++)
+    {
+        items.at(i)->detach();
+    }
+
     Histogram *histogram = new Histogram( "Speed", Qt::red );
     histogram->setValues(values.size(), values );
     histogram->attach( grid );
