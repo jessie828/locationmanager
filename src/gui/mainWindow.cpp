@@ -14,12 +14,12 @@ MainWindow::MainWindow()
 
     connect(actionImport_Trip, SIGNAL(activated()), this, SLOT(openTripImportDialog()));
     connect(actionImport_Tank, SIGNAL(activated()), this, SLOT(openTankImportDialog()));
-    connect(calendarWidget, SIGNAL(clicked(QDate)), this, SLOT(fillOverviewList(QDate)));
-    connect(calendarWidget, SIGNAL(clicked(QDate)), this, SLOT(fillTable(QDate)));
+    connect(calendarWidget, SIGNAL(clicked(QDate)), this, SLOT(dateClicked(QDate)));
     connect(actionExit, SIGNAL(activated()), this, SLOT(close()));
     connect(actionImport_multiTrips, SIGNAL(activated()), this, SLOT(openMultiTripImportDialog()));
 
-    connect(tabWidget, SIGNAL(currentChanged(int)), this, SLOT(paintGraph(int)));
+    connect(timeType, SIGNAL(currentIndexChanged(int)), this, SLOT(timeTypeChanged(int)));
+    connect(speedType, SIGNAL(currentIndexChanged(int)), this, SLOT(speedTypeChanged(int)));
 }
 
 
@@ -44,11 +44,23 @@ void MainWindow::openMultiTripImportDialog()
 }
 
 
-void MainWindow::fillOverviewList(QDate date)
+void MainWindow::dateClicked(QDate date)
 {
-    tripViews->clear();
     QList<Trip> trips = Database::getInstance()->getAllTrips(date);
     QList<Tank> tanks = Database::getInstance()->getAllTanks(date);
+    int time = timeType->currentIndex();
+    int speed = speedType->currentIndex();
+
+    fillOverviewList(trips, tanks);
+    fillTable(trips);
+    paintGraph(time, speed, date);
+
+}
+
+
+void MainWindow::fillOverviewList(const QList<Trip> &trips, const QList<Tank> &tanks)
+{
+    tripViews->clear();
 
    for(int i = 0; i < trips.size(); i++)
     {
@@ -67,14 +79,12 @@ void MainWindow::fillOverviewList(QDate date)
 }
 
 
-void MainWindow::fillTable(QDate date)
+void MainWindow::fillTable(const QList<Trip> &trips)
 {
-    tableWidget->hide();
-    tableWidget->clearContents();
-    QList<Trip> trips = Database::getInstance()->getAllTrips(date);
-
     QStringList HorizontalLabels;
     HorizontalLabels << tr("startDate") << tr("EndDate") << tr("Duration") << tr("Distance") << tr("average Speed") << tr("Maximum speed");
+    tableWidget->hide();
+    tableWidget->clearContents();
     tableWidget->setRowCount(trips.size());
     tableWidget->setColumnCount(HorizontalLabels.size());
     tableWidget->setHorizontalHeaderLabels(HorizontalLabels);
@@ -112,21 +122,32 @@ QString MainWindow::durationToString(int duration) const
 }
 
 
-void MainWindow::paintGraph(int tabId)
+void MainWindow::speedTypeChanged(int index)
 {
-    //TODO need to redraw when timeType and speedType change.
-    if(tabId == 1)
-    {
-        setupPlotArea();
-        int time = timeType->currentIndex();
-        int speed = speedType->currentIndex();
-        QDate date = calendarWidget->selectedDate();
+    int time = timeType->currentIndex();
+    QDate date = calendarWidget->selectedDate();
 
-        QList<Trip> trips = Database::getInstance()->getAllTripsLocations(date, time);
+    paintGraph(time, index, date);
+}
 
-        QList<double> values = calculateSpeeds(trips, speed);
-        populate(values);
-    }
+
+void MainWindow::timeTypeChanged(int index)
+{
+    int speed = speedType->currentIndex();
+    QDate date = calendarWidget->selectedDate();
+
+    paintGraph(index, speed, date);
+}
+
+
+void MainWindow::paintGraph(int timeIndex, int speedIndex, const QDate &date)
+{
+    setupPlotArea();
+
+    QList<Trip> trips = Database::getInstance()->getAllTripsLocations(date, timeIndex);
+
+    QList<double> values = calculateSpeeds(trips, speedIndex);
+    populate(values);
 }
 
 

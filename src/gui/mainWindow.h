@@ -20,14 +20,17 @@ class MainWindow: public QMainWindow, private Ui::locationManagerMainWindow
         QString durationToString(int duration) const;
         void setupPlotArea();
         QList<double> calculateSpeeds(const QList<Trip> &trips, int speed);
+        void fillOverviewList(const QList<Trip> &trips, const QList<Tank> &tanks);
+        void fillTable(const QList<Trip> &trips);
+        void paintGraph(int timeIndex, int speedIndex, const QDate &date);
 
     public slots:
         void openTripImportDialog();
         void openMultiTripImportDialog();
         void openTankImportDialog();
-        void fillOverviewList(QDate date);
-        void fillTable(QDate date);
-        void paintGraph(int tabId);
+        void dateClicked(QDate date);
+        void timeTypeChanged(int index);
+        void speedTypeChanged(int index);
 
 };
 
