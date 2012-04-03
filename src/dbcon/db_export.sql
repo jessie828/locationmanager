@@ -6,6 +6,17 @@
 # USE locationDB;
 
 #
+# Table structure for table 'ImportedTrips'
+#
+
+# DROP TABLE IF EXISTS ImportedTrips;
+CREATE TABLE `ImportedTrips` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `filename` text NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+#
 # Table structure for table 'Locations'
 #
 
