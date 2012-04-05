@@ -91,6 +91,46 @@ bool Database::insert(Tank *tank)
 }
 
 
+bool Database::insert(const QString &fileName)
+{
+    QSqlQuery query;
+    QString queryString = QString("INSERT INTO ImportedTrips(filename) "
+        "VALUES('%1')")
+        .arg(fileName.toAscii().data());
+
+        query.exec(queryString);
+
+    if (!query.isActive())
+    {
+        QMessageBox::warning(0, QObject::tr("Database Error while inserting importedTrip"), query.lastError().text());
+        return false;
+    }
+    return true;
+
+}
+
+
+bool Database::TripImported(const QString &filename)
+{
+    QSqlQuery query;
+    QString queryString = QString("SELECT filename FROM ImportedTrips");
+
+    query.exec(queryString);
+    if(!query.isActive())
+    {
+        QMessageBox::warning(0, QObject::tr("Database Error"), query.lastError().text());
+    }
+
+    QStringList ImportedTrips;
+    while(query.next())
+    {
+        ImportedTrips.append(query.value(0).toString());
+    }
+
+    return ImportedTrips.contains(filename, Qt::CaseInsensitive);
+}
+
+
 int Database::getLastTripId() const
 {
     int result = -1;

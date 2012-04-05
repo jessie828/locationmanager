@@ -138,18 +138,30 @@ bool TcxSaxHandler::fatalError(const QXmlParseException &exception)
 
 bool TcxSaxHandler::parseFile(const QString &fileName)
 {
-    QFile file(fileName);
-    QFileInfo fileInfo(fileName);
-    QString extension = fileInfo.suffix();
-    if(extension == TcxSaxHandler::TCX)
+    if(!Database::getInstance()->TripImported(fileName))
     {
-        QXmlInputSource inputSource(&file);
-        QXmlSimpleReader reader;
-        TcxSaxHandler handler;
-        reader.setContentHandler(&handler);
-        reader.setErrorHandler(&handler);
-        return reader.parse(inputSource);
+        Database::getInstance()->insert(fileName);
+        QFile file(fileName);
+        QFileInfo fileInfo(fileName);
+        QString extension = fileInfo.suffix();
+        if(extension == TcxSaxHandler::TCX)
+        {
+            QXmlInputSource inputSource(&file);
+            QXmlSimpleReader reader;
+            TcxSaxHandler handler;
+            reader.setContentHandler(&handler);
+            reader.setErrorHandler(&handler);
+            return reader.parse(inputSource);
+        }
+        else
+        {
+            return false;
+        }
     }
-    return false;
+    else
+    {
+        QMessageBox::information(0, QObject::tr("Trip already imported."), QString("The trip you are trying to import is already imported."));
+        return true;
+    }
 }
 

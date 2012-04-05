@@ -22,6 +22,8 @@ public:
     bool insert(Trip *trip);
     bool insert(Location *location);
     bool insert(Tank *tank);
+    bool insert(const QString &fileName);
+    bool TripImported(const QString &filename);
     int getLastTripId() const;
     QList<Trip> getAllTrips(const QDate &date);
     QList<Tank> getAllTanks(const QDate &date);
