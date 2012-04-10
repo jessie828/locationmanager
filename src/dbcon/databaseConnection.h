@@ -25,9 +25,11 @@ public:
     bool insert(const QString &fileName);
     bool TripImported(const QString &filename);
     int getLastTripId() const;
-    QList<Trip> getAllTrips(const QDate &date);
-    QList<Tank> getAllTanks(const QDate &date);
-    QList<Trip> getAllTripsLocations(const QDate &date, int time);
+    QList<Trip> getTrips(const QDate &date);
+    QList<Tank> getTanks(const QDate &date);
+    QList<Trip> getTripsLocations(const QDate &date, int time);
+    QList<Trip> getAllTrips();
+    QList<Tank> getAllTanks();
     ~Database();
 
 protected:

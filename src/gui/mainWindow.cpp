@@ -20,6 +20,9 @@ MainWindow::MainWindow()
 
     connect(timeType, SIGNAL(currentIndexChanged(int)), this, SLOT(timeTypeChanged(int)));
     connect(speedType, SIGNAL(currentIndexChanged(int)), this, SLOT(speedTypeChanged(int)));
+
+    statusbar->showMessage("loaded windows");
+    markDates();
 }
 
 
@@ -46,15 +49,14 @@ void MainWindow::openMultiTripImportDialog()
 
 void MainWindow::dateClicked(QDate date)
 {
-    QList<Trip> trips = Database::getInstance()->getAllTrips(date);
-    QList<Tank> tanks = Database::getInstance()->getAllTanks(date);
+    QList<Trip> trips = Database::getInstance()->getTrips(date);
+    QList<Tank> tanks = Database::getInstance()->getTanks(date);
     int time = timeType->currentIndex();
     int speed = speedType->currentIndex();
 
     fillOverviewList(trips, tanks);
     fillTable(trips);
     paintGraph(time, speed, date);
-
 }
 
 
@@ -105,6 +107,32 @@ void MainWindow::fillTable(const QList<Trip> &trips)
 }
 
 
+void MainWindow::markTripDays(const QList<Trip> &trips)
+{
+    QTextCharFormat format;
+    format.setFontUnderline(true);
+
+    for(int i = 0; i < trips.size(); i++)
+    {
+        QDate date = trips.at(i).getStartDate().date();
+        calendarWidget->setDateTextFormat(date, format);
+    }
+}
+
+
+void MainWindow::markTankDays(const QList<Tank> &tanks)
+{
+    QTextCharFormat format;
+    format.setFontItalic(true);
+
+    for(int i = 0; i < tanks.size(); i++)
+    {
+        QDate date = tanks.at(i).getDate();
+        calendarWidget->setDateTextFormat(date, format);
+    }
+}
+
+
 QString MainWindow::durationToString(int duration) const
 {
     unsigned minutes, hours, secs_left, mins_left;
@@ -144,7 +172,7 @@ void MainWindow::paintGraph(int timeIndex, int speedIndex, const QDate &date)
 {
     setupPlotArea();
 
-    QList<Trip> trips = Database::getInstance()->getAllTripsLocations(date, timeIndex);
+    QList<Trip> trips = Database::getInstance()->getTripsLocations(date, timeIndex);
 
     QList<double> values = calculateSpeeds(trips, speedIndex);
     populate(values);
@@ -183,6 +211,15 @@ QList<double> MainWindow::calculateSpeeds(const QList<Trip> &trips, int speed)
         }
     }
     return values;
+}
+
+
+void MainWindow::markDates()
+{
+    QList<Trip> trips = Database::getInstance()->getAllTrips();
+    QList<Tank> tanks = Database::getInstance()->getAllTanks();
+    markTripDays(trips);
+    markTankDays(tanks);
 }
 
 

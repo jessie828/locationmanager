@@ -149,7 +149,7 @@ int Database::getLastTripId() const
 }
 
 
-QList<Trip> Database::getAllTrips(const QDate &date)
+QList<Trip> Database::getTrips(const QDate &date)
 {
     QString dateFormat = "yyyy-MM-dd";
     QDate borderDate = date.addDays(1);
@@ -184,7 +184,7 @@ QList<Trip> Database::getAllTrips(const QDate &date)
 }
 
 
-QList<Tank> Database::getAllTanks(const QDate &date)
+QList<Tank> Database::getTanks(const QDate &date)
 {
     QString dateFormat = "yyyy-MM-dd";
     QSqlQuery query;
@@ -215,7 +215,7 @@ QList<Tank> Database::getAllTanks(const QDate &date)
 }
 
 
-QList<Trip> Database::getAllTripsLocations(const QDate &date, int time)
+QList<Trip> Database::getTripsLocations(const QDate &date, int time)
 {
     QString dateFormat = "yyyy-MM-dd";
     QSqlQuery query;
@@ -272,6 +272,66 @@ QList<Trip> Database::getAllTripsLocations(const QDate &date, int time)
     }
 
     return trips;
+}
+
+
+QList<Trip> Database::getAllTrips()
+{
+    QSqlQuery query;
+    QString queryString = "SELECT * FROM Trips";
+
+    query.exec(queryString);
+    if(!query.isActive())
+    {
+        QMessageBox::warning(0, QObject::tr("Database Error"), query.lastError().text());
+    }
+
+    QList<Trip> trips;
+    QString returnDateFormat = "yyyy-MM-dd'T'hh:mm:ss";
+    while(query.next())
+    {
+        int tripId = query.value(0).toInt();
+        Trip newTrip(tripId);
+        newTrip.setStartDate(QDateTime::fromString(query.value(1).toString(), returnDateFormat));
+        newTrip.setStopDate(QDateTime::fromString(query.value(2).toString(), returnDateFormat));
+        newTrip.setDuration(query.value(3).toInt());
+        newTrip.setDistance(query.value(4).toInt());
+        newTrip.setAvgSpeed(query.value(5).toDouble());
+        newTrip.setMaxSpeed(query.value(6).toDouble());
+
+        trips.append(newTrip);
+    }
+
+    return trips;
+}
+
+
+QList<Tank> Database::getAllTanks()
+{
+    QSqlQuery query;
+    QString queryString = "SELECT * FROM Tank";
+
+    query.exec(queryString);
+    if(!query.isActive())
+    {
+        QMessageBox::warning(0, QObject::tr("Database Error"), query.lastError().text());
+    }
+
+    QList<Tank> tanks;
+    while(query.next())
+    {
+        Tank newTank;
+        newTank.setId(query.value(0).toInt());
+        newTank.setDate(QDate::fromString(query.value(1).toString(), dateFormat));
+        newTank.setLiters(query.value(2).toDouble());
+        newTank.setPricePerLiter(query.value(3).toDouble());
+        newTank.setMileage(query.value(4).toInt());
+        newTank.setLocation(query.value(5).toString());
+
+        tanks.append(newTank);
+    }
+
+    return tanks;
 }
 
 
