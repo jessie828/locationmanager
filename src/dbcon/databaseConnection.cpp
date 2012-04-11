@@ -322,7 +322,7 @@ QList<Tank> Database::getAllTanks()
     {
         Tank newTank;
         newTank.setId(query.value(0).toInt());
-        newTank.setDate(QDate::fromString(query.value(1).toString(), dateFormat));
+        newTank.setDate(QDate::fromString(query.value(1).toString(), QString("yyyy-MM-dd")));
         newTank.setLiters(query.value(2).toDouble());
         newTank.setPricePerLiter(query.value(3).toDouble());
         newTank.setMileage(query.value(4).toInt());

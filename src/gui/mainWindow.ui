@@ -30,13 +30,13 @@
      <attribute name="title">
       <string>TableView</string>
      </attribute>
-     <widget class="QTableWidget" name="tableWidget">
+     <widget class="QTableWidget" name="tripTable">
       <property name="geometry">
        <rect>
         <x>0</x>
         <y>0</y>
         <width>781</width>
-        <height>481</height>
+        <height>271</height>
        </rect>
       </property>
       <column>
@@ -67,6 +67,41 @@
       <column>
        <property name="text">
         <string>Duration</string>
+       </property>
+      </column>
+     </widget>
+     <widget class="QTableWidget" name="tankTable">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>271</y>
+        <width>781</width>
+        <height>201</height>
+       </rect>
+      </property>
+      <column>
+       <property name="text">
+        <string>Date</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Liters</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Price Per Liter</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Mileage</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Location</string>
        </property>
       </column>
      </widget>

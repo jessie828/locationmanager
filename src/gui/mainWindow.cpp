@@ -55,7 +55,8 @@ void MainWindow::dateClicked(QDate date)
     int speed = speedType->currentIndex();
 
     fillOverviewList(trips, tanks);
-    fillTable(trips);
+    fillTripTable(trips);
+    fillTankTable(tanks);
     paintGraph(time, speed, date);
 }
 
@@ -81,54 +82,73 @@ void MainWindow::fillOverviewList(const QList<Trip> &trips, const QList<Tank> &t
 }
 
 
-void MainWindow::fillTable(const QList<Trip> &trips)
+void MainWindow::fillTripTable(const QList<Trip> &trips)
 {
     QStringList HorizontalLabels;
     HorizontalLabels << tr("startDate") << tr("EndDate") << tr("Duration") << tr("Distance") << tr("average Speed") << tr("Maximum speed");
-    tableWidget->hide();
-    tableWidget->clearContents();
-    tableWidget->setRowCount(trips.size());
-    tableWidget->setColumnCount(HorizontalLabels.size());
-    tableWidget->setHorizontalHeaderLabels(HorizontalLabels);
-    tableWidget->setShowGrid(true);
+    tripTable->hide();
+    tripTable->clearContents();
+    tripTable->setRowCount(trips.size());
+    tripTable->setColumnCount(HorizontalLabels.size());
+    tripTable->setHorizontalHeaderLabels(HorizontalLabels);
+    tripTable->setShowGrid(true);
 
     for(int i = 0; i < trips.size(); i++)
     {
-        tableWidget->setItem(i, 0, new QTableWidgetItem(trips.at(i).getStartDate().toString("yyyy-MM-dd h:mm AP")));
-        tableWidget->setItem(i, 1, new QTableWidgetItem(trips.at(i).getStopDate().toString("yyyy-MM-dd h:mm AP")));
-        tableWidget->setItem(i, 2, new QTableWidgetItem(durationToString(trips.at(i).getDuration())));
-        tableWidget->setItem(i, 3, new QTableWidgetItem(QString::number(trips.at(i).getDistance() * 0.001) + " Kilometers"));
-        tableWidget->setItem(i, 4, new QTableWidgetItem(QString::number(trips.at(i).getAvgSpeed()) + " KM/H"));
-        tableWidget->setItem(i, 5, new QTableWidgetItem(QString::number(trips.at(i).getMaxSpeed()) + " KM/H"));
+        tripTable->setItem(i, 0, new QTableWidgetItem(trips.at(i).getStartDate().toString("yyyy-MM-dd h:mm AP")));
+        tripTable->setItem(i, 1, new QTableWidgetItem(trips.at(i).getStopDate().toString("yyyy-MM-dd h:mm AP")));
+        tripTable->setItem(i, 2, new QTableWidgetItem(durationToString(trips.at(i).getDuration())));
+        tripTable->setItem(i, 3, new QTableWidgetItem(QString::number(trips.at(i).getDistance() * 0.001) + " Kilometers"));
+        tripTable->setItem(i, 4, new QTableWidgetItem(QString::number(trips.at(i).getAvgSpeed()) + " KM/H"));
+        tripTable->setItem(i, 5, new QTableWidgetItem(QString::number(trips.at(i).getMaxSpeed()) + " KM/H"));
     }
 
-    tableWidget->horizontalHeader()->setResizeMode(QHeaderView::ResizeToContents);
-    tableWidget->show();
+    tripTable->horizontalHeader()->setResizeMode(QHeaderView::ResizeToContents);
+    tripTable->show();
+}
+
+
+void MainWindow::fillTankTable(const QList<Tank> &tanks)
+{
+    tankTable->hide();
+    tankTable->clearContents();
+    tankTable->setRowCount(tanks.size());
+    tankTable->setShowGrid(true);
+
+    for(int i = 0; i < tanks.size(); i++)
+    {
+        tankTable->setItem(i, 0, new QTableWidgetItem(tanks.at(i).getDate().toString("yyyy-MM-dd")));
+        tankTable->setItem(i, 1, new QTableWidgetItem(QString::number(tanks.at(i).getLiters())));
+        tankTable->setItem(i, 2, new QTableWidgetItem(QString::number(tanks.at(i).getPricePerLiter())));
+        tankTable->setItem(i, 3, new QTableWidgetItem(QString::number(tanks.at(i).getMileage())));
+        tankTable->setItem(i, 4, new QTableWidgetItem(tanks.at(i).getLocation()));
+    }
+
+    tankTable->horizontalHeader()->setResizeMode(QHeaderView::ResizeToContents);
+    tankTable->show();
 }
 
 
 void MainWindow::markTripDays(const QList<Trip> &trips)
 {
-    QTextCharFormat format;
-    format.setFontUnderline(true);
+    m_format.setFontUnderline(true);
 
     for(int i = 0; i < trips.size(); i++)
     {
         QDate date = trips.at(i).getStartDate().date();
-        calendarWidget->setDateTextFormat(date, format);
+        calendarWidget->setDateTextFormat(date, m_format);
     }
 }
 
 
 void MainWindow::markTankDays(const QList<Tank> &tanks)
 {
-    QTextCharFormat format;
-    format.setFontItalic(true);
+    m_format.setFontItalic(true);
 
     for(int i = 0; i < tanks.size(); i++)
     {
         QDate date = tanks.at(i).getDate();
-        calendarWidget->setDateTextFormat(date, format);
+        calendarWidget->setDateTextFormat(date, m_format);
     }
 }
 

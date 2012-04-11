@@ -7,6 +7,7 @@
 
 #include <QDate>
 #include <QListWidgetItem>
+#include <QTextCharFormat>
 
 class MainWindow: public QMainWindow, private Ui::locationManagerMainWindow
 {
@@ -21,7 +22,8 @@ class MainWindow: public QMainWindow, private Ui::locationManagerMainWindow
         void setupPlotArea();
         QList<double> calculateSpeeds(const QList<Trip> &trips, int speed);
         void fillOverviewList(const QList<Trip> &trips, const QList<Tank> &tanks);
-        void fillTable(const QList<Trip> &trips);
+        void fillTripTable(const QList<Trip> &trips);
+        void fillTankTable(const QList<Tank> &tanks);
         void markTripDays(const QList<Trip> &trips);
         void markTankDays(const QList<Tank> &tanks);
         void paintGraph(int timeIndex, int speedIndex, const QDate &date);
@@ -34,6 +36,9 @@ class MainWindow: public QMainWindow, private Ui::locationManagerMainWindow
         void dateClicked(QDate date);
         void timeTypeChanged(int index);
         void speedTypeChanged(int index);
+
+    private:
+        QTextCharFormat m_format;
 };
 
 #endif
