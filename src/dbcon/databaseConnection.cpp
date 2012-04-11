@@ -243,7 +243,7 @@ QList<Trip> Database::getTripsLocations(const QDate &date, int time)
     else if(time == 2)
     {
         QDate startDate = findFirstDayOfWeek(date);
-        QDate borderDate = date.addDays(7);
+        QDate borderDate = startDate.addDays(7);
         queryString += QString("WHERE startdate BETWEEN '%1' AND '%2'")
             .arg(startDate.toString(dateFormat))
             .arg(borderDate.toString(dateFormat));
