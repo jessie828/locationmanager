@@ -22,7 +22,7 @@ public:
     bool insert(Trip *trip);
     bool insert(Location *location);
     bool insert(Tank *tank);
-    bool insert(const QString &fileName);
+    bool insert(const QString &fileName, const QString &fileType);
     bool TripImported(const QString &filename);
     int getLastTripId() const;
     QList<Trip> getTrips(const QDate &date);

@@ -140,7 +140,7 @@ bool TcxSaxHandler::parseFile(const QString &fileName)
 {
     if(!Database::getInstance()->TripImported(fileName))
     {
-        Database::getInstance()->insert(fileName);
+        Database::getInstance()->insert(fileName, "tcx");
         QFile file(fileName);
         QFileInfo fileInfo(fileName);
         QString extension = fileInfo.suffix();

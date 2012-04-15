@@ -13,6 +13,7 @@
 CREATE TABLE `ImportedTrips` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `filename` text NOT NULL,
+  `fileType` text NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 

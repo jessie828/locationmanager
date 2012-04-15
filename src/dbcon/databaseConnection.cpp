@@ -91,12 +91,13 @@ bool Database::insert(Tank *tank)
 }
 
 
-bool Database::insert(const QString &fileName)
+bool Database::insert(const QString &fileName, const QString &fileType)
 {
     QSqlQuery query;
     QString queryString = QString("INSERT INTO ImportedTrips(filename) "
-        "VALUES('%1')")
-        .arg(fileName.toAscii().data());
+        "VALUES('%1', '%2')")
+        .arg(fileName.toAscii().data())
+        .arg(fileType.toAscii().data());
 
         query.exec(queryString);
 
