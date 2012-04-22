@@ -142,21 +142,12 @@ bool TcxSaxHandler::parseFile(const QString &fileName)
     {
         Database::getInstance()->insert(fileName, "tcx");
         QFile file(fileName);
-        QFileInfo fileInfo(fileName);
-        QString extension = fileInfo.suffix();
-        if(extension == TcxSaxHandler::TCX)
-        {
-            QXmlInputSource inputSource(&file);
-            QXmlSimpleReader reader;
-            TcxSaxHandler handler;
-            reader.setContentHandler(&handler);
-            reader.setErrorHandler(&handler);
-            return reader.parse(inputSource);
-        }
-        else
-        {
-            return false;
-        }
+
+        QXmlInputSource inputSource(&file);
+        QXmlSimpleReader reader;
+        reader.setContentHandler(this);
+        reader.setErrorHandler(this);
+        return reader.parse(inputSource);
     }
     else
     {

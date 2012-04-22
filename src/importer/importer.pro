@@ -29,10 +29,12 @@ DESTDIR = $$LMNGT_SANDBOX_LIB
 # Input
 SOURCES += \
            saxHandler.cpp \
+           csvHandler.cpp \
            #
 
 HEADERS += \
            saxHandler.h \
+           cxvHandler.h \
            #
 
 QMAKE_CXXFLAGS += -fno-strict-aliasing

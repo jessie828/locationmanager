@@ -18,11 +18,28 @@ void TripImportDialog::import()
         QMessageBox::warning(0, QObject::tr("Input Field Empty"), QString("The input field is empty.\nPlease select a valid file and try again."));
         return;
     }
-    TcxSaxHandler handler;
-    bool parseSucessful = handler.parseFile(fileLocation);
-    if(!parseSucessful)
+
+    QFileInfo fileInfo(fileLocation);
+    QString extension = fileInfo.suffix();
+    bool parseSucessful;
+    if(extension == TcxSaxHandler::TCX)
+    {
+        TcxSaxHandler handler;
+        parseSucessful = handler.parseFile(fileLocation);
+    }
+    else if(extension == CsvHandler::CSV)
+    {
+        CsvHandler csvHanderl;
+        parseSucessful = csvHanderl.parseFile(fileLocation);
+    }
+    else
     {
         QMessageBox::warning(0, QObject::tr("Wrong file extension"), QString("You have selected a wrong file extension"));
+    }
+
+    if(!parseSucessful)
+    {
+        QMessageBox::warning(0, QObject::tr("parse unsuccessful"), QString("The parsing of the trip is unsuccessful"));
     }
     else
     {

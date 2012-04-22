@@ -5,6 +5,7 @@
 #include <QtGui>
 
 #include "saxHandler.h"
+#include "csvHandler.h"
 
 class TripImportDialog : public QDialog, private Ui::tripImportDialog
 {
