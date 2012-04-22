@@ -24,7 +24,7 @@ bool Database::createConnection()
     if (!m_db.open())
     {
         QString errorMessage = m_db.lastError().text();
-        QMessageBox::critical(0, QObject::tr("Database Error"), errorMessage);
+        QMessageBox::critical(0, QObject::tr("Database Error while creating the connection"), errorMessage);
         return false;
     }
     return true;
@@ -94,7 +94,7 @@ bool Database::insert(Tank *tank)
 bool Database::insert(const QString &fileName, const QString &fileType)
 {
     QSqlQuery query;
-    QString queryString = QString("INSERT INTO ImportedTrips(filename) "
+    QString queryString = QString("INSERT INTO ImportedTrips(filename, fileType) "
         "VALUES('%1', '%2')")
         .arg(fileName.toAscii().data())
         .arg(fileType.toAscii().data());
@@ -119,7 +119,7 @@ bool Database::TripImported(const QString &filename)
     query.exec(queryString);
     if(!query.isActive())
     {
-        QMessageBox::warning(0, QObject::tr("Database Error"), query.lastError().text());
+        QMessageBox::warning(0, QObject::tr("Database Error while retrieving importedTrips"), query.lastError().text());
     }
 
     QStringList ImportedTrips;
@@ -144,7 +144,7 @@ int Database::getLastTripId() const
     }
     if (!query.isActive())
     {
-        QMessageBox::warning(0, QObject::tr("Database Error"), query.lastError().text());
+        QMessageBox::warning(0, QObject::tr("Database Error while retrieving last trip ID"), query.lastError().text());
     }
     return result;
 }
@@ -162,7 +162,7 @@ QList<Trip> Database::getTrips(const QDate &date)
     query.exec(queryString);
     if(!query.isActive())
     {
-        QMessageBox::warning(0, QObject::tr("Database Error"), query.lastError().text());
+        QMessageBox::warning(0, QObject::tr("Database Error while retreiving trips"), query.lastError().text());
     }
 
     QList<Trip> trips;
@@ -195,7 +195,7 @@ QList<Tank> Database::getTanks(const QDate &date)
     query.exec(queryString);
     if(!query.isActive())
     {
-        QMessageBox::warning(0, QObject::tr("Database Error"), query.lastError().text());
+        QMessageBox::warning(0, QObject::tr("Database Error while retrieving tanks"), query.lastError().text());
     }
 
     QList<Tank> tanks;
@@ -253,7 +253,7 @@ QList<Trip> Database::getTripsLocations(const QDate &date, int time)
     query.exec(queryString);
     if(!query.isActive())
     {
-        QMessageBox::warning(0, QObject::tr("Database Error"), query.lastError().text());
+        QMessageBox::warning(0, QObject::tr("Database Error while retrieving trips with locations"), query.lastError().text());
     }
 
     QList<Trip> trips;
@@ -284,7 +284,7 @@ QList<Trip> Database::getAllTrips()
     query.exec(queryString);
     if(!query.isActive())
     {
-        QMessageBox::warning(0, QObject::tr("Database Error"), query.lastError().text());
+        QMessageBox::warning(0, QObject::tr("Database Error while retrieving all trips"), query.lastError().text());
     }
 
     QList<Trip> trips;
@@ -315,7 +315,7 @@ QList<Tank> Database::getAllTanks()
     query.exec(queryString);
     if(!query.isActive())
     {
-        QMessageBox::warning(0, QObject::tr("Database Error"), query.lastError().text());
+        QMessageBox::warning(0, QObject::tr("Database Error while retrieving  all tanks"), query.lastError().text());
     }
 
     QList<Tank> tanks;
